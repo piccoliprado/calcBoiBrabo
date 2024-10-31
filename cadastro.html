@@ -4,21 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login</title>
-
+    <title>Cadastro</title>
     <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
-    <form class="form" action="login.php" method="POST">
+    <form class="form" action="cadastrar_usuario.php" method="POST">
         <div class="card">
             <div class="card-top">
-                <img class="imglogin" src="img/logo-boi.png" alt="">
-                <h2 class="title">Login</h2>
+                <h2 class="title">Cadastro de Usuário</h2>
+            </div>
+
+            <div class="card-group">
+                <label>Nome</label>
+                <input type="text" name="nome" placeholder="Digite seu nome" required>
             </div>
 
             <div class="card-group">
                 <label>Email</label>
-                <input type="text" name="email" placeholder="Digite seu email" required>
+                <input type="email" name="email" placeholder="Digite seu email" required>
             </div>
 
             <div class="card-group">
@@ -27,10 +30,7 @@
             </div>
 
             <div class="card-group btn">
-                <button type="submit">ACESSAR</button>
-            </div>
-            <div class="card-group">
-                <a href="cadastro.html">Criar nova conta</a>
+                <button type="submit">CADASTRAR</button>
             </div>
         </div>
     </form>
