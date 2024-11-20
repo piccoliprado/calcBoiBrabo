@@ -1,70 +1,64 @@
 <?php
-// Conexão com o banco de dados
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "calcbc";
+session_start();
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Erro de conexão: " . $conn->connect_error);
-}
-
-// Recebe os dados do formulário
-$email = $_POST['email'];
-$senha = $_POST['senha'];
-
-// Consulta o banco de dados
-$sql = "SELECT * FROM usuarios WHERE email = '$email'";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    // Verifica a senha
-    if (password_verify($senha, $row['senha'])) {
-        // Redireciona para index.php em caso de login bem-sucedido
-        header("Location: index.php");
-        exit();
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    include 'config/database.php';
+    
+    $email = $conn->real_escape_string($_POST['email']);
+    $senha = $_POST['senha'];
+    
+    $sql = "SELECT * FROM usuarios WHERE email = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($result->num_rows > 0) {
+        $usuario = $result->fetch_assoc();
+        if (password_verify($senha, $usuario['senha'])) {
+            $_SESSION['usuario_id'] = $usuario['id'];
+            $_SESSION['usuario_nome'] = $usuario['nome'];
+            header("Location: admin/index.php");
+            exit();
+        } else {
+            $erro = "Senha incorreta";
+        }
     } else {
-        $mensagem = "Senha incorreta.";
+        $erro = "Usuário não encontrado";
     }
-} else {
-    $mensagem = "Usuário não encontrado.";
+    
+    $conn->close();
 }
-
-$conn->close();
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Login - Área do Proprietário</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="form">
-        <div class="card">
-            <h1 class="title">Login</h1>
-            <?php if (isset($mensagem)): ?>
-                <p class="error-message"><?php echo $mensagem; ?></p>
+    <div class="login-container">
+        <form class="login-form" method="POST">
+            <h2>Área do Proprietário</h2>
+            <?php if (isset($erro)): ?>
+                <div class="erro"><?php echo $erro; ?></div>
             <?php endif; ?>
-            <form action="login.php" method="POST">
-                <div class="card-group">
-                    <label>Email</label>
-                    <input type="text" name="email" placeholder="Digite seu email" required>
-                </div>
-                <div class="card-group">
-                    <label>Senha</label>
-                    <input type="password" name="senha" placeholder="Digite sua senha" required>
-                </div>
-                <div class="card-group btn">
-                    <button type="submit">Acessar</button>
-                </div>
-                <p><a href="cadastro_usuario.php">Criar uma conta</a></p>
-            </form>
-        </div>
+            
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" name="senha" required>
+            </div>
+            
+            <button type="submit">Entrar</button>
+            <a href="home.php" class="voltar">Voltar para Home</a>
+        </form>
     </div>
 </body>
 </html>

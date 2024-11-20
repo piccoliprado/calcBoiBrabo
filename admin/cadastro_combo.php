@@ -1,4 +1,5 @@
 <?php
+require_once 'check_auth.php';
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -16,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $margem_lucro = $_POST['margem_lucro'];
 
     // Processar upload da imagem
-    $target_dir = "img/";
+    $target_dir = "uploads/";
     $target_file = $target_dir . basename($_FILES["foto"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -32,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Verificar se o upload é permitido
     if ($uploadOk == 1 && move_uploaded_file($_FILES["foto"]["tmp_name"], $target_file)) {
-        $sql = "INSERT INTO combos (nome_combo, preco, margem_lucro, foto)
+        $sql = "INSERT INTO combos (nome_combo, preco, margem_lucro, url_foto)
                 VALUES ('$nome_combo', '$preco', '$margem_lucro', '$target_file')";
 
         if ($conn->query($sql) === TRUE) {
