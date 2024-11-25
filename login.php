@@ -1,9 +1,13 @@
 <?php
-session_start();
+include_once 'config/auth.php';
+include_once 'config/database.php';
+
+if (isLoggedIn()) {
+    header("Location: /admin/calculadora.php");
+    exit();
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    include 'config/database.php';
-    
     $email = $conn->real_escape_string($_POST['email']);
     $senha = $_POST['senha'];
     
@@ -18,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($senha, $usuario['senha'])) {
             $_SESSION['usuario_id'] = $usuario['id'];
             $_SESSION['usuario_nome'] = $usuario['nome'];
-            header("Location: admin/index.php");
+            header("Location: /admin/calculadora.php");
             exit();
         } else {
             $erro = "Senha incorreta";
@@ -26,9 +30,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $erro = "Usuário não encontrado";
     }
-    
-    $conn->close();
 }
+
+include 'header.php';
 ?>
 
 <!DOCTYPE html>
@@ -36,29 +40,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Login - Área do Proprietário</title>
-    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="login-container">
-        <form class="login-form" method="POST">
-            <h2>Área do Proprietário</h2>
+    <div class="form">
+        <div class="card">
+            <h1 class="title">Login - Área do Proprietário</h1>
+            
             <?php if (isset($erro)): ?>
-                <div class="erro"><?php echo $erro; ?></div>
+                <div class="error-message"><?php echo $erro; ?></div>
             <?php endif; ?>
             
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="senha">Senha</label>
-                <input type="password" id="senha" name="senha" required>
-            </div>
-            
-            <button type="submit">Entrar</button>
-            <a href="home.php" class="voltar">Voltar para Home</a>
-        </form>
+            <form method="POST">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Senha</label>
+                    <input type="password" name="senha" required>
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="btn">Entrar</button>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 </html>

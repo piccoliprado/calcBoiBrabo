@@ -1,92 +1,74 @@
 <?php
 require_once 'check_auth.php';
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "calcbc";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Conexão falhou: " . $conn->connect_error);
-}
+include_once '../header.php';
+include_once '../config/database.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nome_combo = $_POST['nome_combo'];
-    $preco = $_POST['preco'];
-    $margem_lucro = $_POST['margem_lucro'];
+    $nome_combo = $conn->real_escape_string($_POST['nome_combo']);
+    $preco = $conn->real_escape_string($_POST['preco']);
+    $margem_lucro = $conn->real_escape_string($_POST['margem_lucro']);
 
-    // Processar upload da imagem
-    $target_dir = "uploads/";
+    $target_dir = "../uploads/";
     $target_file = $target_dir . basename($_FILES["foto"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-    // Verificar se o arquivo é uma imagem
-    $check = getimagesize($_FILES["foto"]["tmp_name"]);
-    if ($check !== false) {
-        $uploadOk = 1;
-    } else {
-        echo "Arquivo não é uma imagem.";
-        $uploadOk = 0;
-    }
-
-    // Verificar se o upload é permitido
-    if ($uploadOk == 1 && move_uploaded_file($_FILES["foto"]["tmp_name"], $target_file)) {
-        $sql = "INSERT INTO combos (nome_combo, preco, margem_lucro, url_foto)
-                VALUES ('$nome_combo', '$preco', '$margem_lucro', '$target_file')";
-
-        if ($conn->query($sql) === TRUE) {
-            echo "Novo combo cadastrado com sucesso!";
-            header("Location: index.php");
-            exit();
+    if (getimagesize($_FILES["foto"]["tmp_name"]) !== false) {
+        if (move_uploaded_file($_FILES["foto"]["tmp_name"], $target_file)) {
+            $sql = "INSERT INTO combos (nome_combo, preco, margem_lucro, url_foto)
+                    VALUES (?, ?, ?, ?)";
+            
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("sdds", $nome_combo, $preco, $margem_lucro, $target_file);
+            
+            if ($stmt->execute()) {
+                header("Location: gerenciar_combos.php");
+                exit();
+            } else {
+                $erro = "Erro ao cadastrar combo: " . $conn->error;
+            }
         } else {
-            echo "Erro ao cadastrar combo: " . $conn->error;
+            $erro = "Erro no upload da imagem.";
         }
     } else {
-        echo "Erro no upload da imagem.";
+        $erro = "Arquivo não é uma imagem válida.";
     }
 }
-
-$conn->close();
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Cadastro de Combo</title>
-    <link rel="stylesheet" href="css/cadastro.css">
-</head>
-<body>
-    <form class="form" action="cadastro_combo.php" method="POST" enctype="multipart/form-data">
-        <div class="card">
-            <h2 class="title">Cadastrar Combo</h2>
-            
-            <div class="card-group">
+<div class="container">
+    <div class="card">
+        <h2 class="title">Cadastrar Novo Combo</h2>
+        
+        <?php if (isset($erro)): ?>
+            <div class="alert alert-danger"><?php echo $erro; ?></div>
+        <?php endif; ?>
+
+        <form action="" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
                 <label>Nome do Combo</label>
-                <input type="text" name="nome_combo" placeholder="Digite o nome do combo" required>
+                <input type="text" name="nome_combo" required class="form-control">
             </div>
 
-            <div class="card-group">
-                <label>Preço</label>
-                <input type="number" step="0.01" name="preco" placeholder="Digite o preço" required>
+            <div class="form-group">
+                <label>Preço (R$)</label>
+                <input type="number" step="0.01" name="preco" required class="form-control">
             </div>
 
-            <div class="card-group">
+            <div class="form-group">
                 <label>Margem de Lucro (%)</label>
-                <input type="number" step="0.01" name="margem_lucro" placeholder="Digite a margem de lucro" required>
+                <input type="number" step="0.01" name="margem_lucro" required class="form-control">
             </div>
 
-            <div class="card-group">
+            <div class="form-group">
                 <label>Foto do Combo</label>
-                <input type="file" name="foto" required>
+                <input type="file" name="foto" required class="form-control">
             </div>
 
-            <div class="card-group btn">
-                <button type="submit">Cadastrar Combo</button>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Cadastrar Combo</button>
+                <a href="gerenciar_combos.php" class="btn btn-secondary">Voltar</a>
             </div>
-        </div>
-    </form>
-</body>
-</html>
+        </form>
+    </div>
+</div>

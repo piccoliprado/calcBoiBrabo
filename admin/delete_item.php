@@ -1,30 +1,21 @@
 <?php
-require_once 'check_auth.php';
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "calcbc";
+require_once '../check_auth.php';
+require_once '../config/database.php';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Conexão falhou: " . $conn->connect_error);
-}
-
-// Verifica se o ID do item foi enviado via GET
 if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-
-    // Exclui o item do banco de dados
-    $sql = "DELETE FROM itens WHERE id = $id";
-    if ($conn->query($sql) === TRUE) {
-        echo "Item excluído com sucesso!";
+    $id = (int)$_GET['id'];
+    
+    $sql = "DELETE FROM itens WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    
+    if ($stmt->execute()) {
+        header("Location: /admin/gerenciar_itens.php?sucesso=1");
     } else {
-        echo "Erro ao excluir: " . $conn->error;
+        header("Location: /admin/gerenciar_itens.php?erro=1");
     }
-} else {
-    echo "ID do item não especificado.";
+    exit();
 }
 
-$conn->close();
-?>
+header("Location: /admin/gerenciar_itens.php");
+exit();

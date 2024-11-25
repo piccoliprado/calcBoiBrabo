@@ -1,32 +1,36 @@
 <?php
-require_once 'check_auth.php';
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "calcbc";
+require_once '../check_auth.php';
+require_once '../config/database.php';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Conexão falhou: " . $conn->connect_error);
-}
-
-// Verifica se o ID do combo foi enviado via GET
 if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-
-    // Exclui o combo do banco de dados
-    $sql = "DELETE FROM combos WHERE id = $id";
-    if ($conn->query($sql) === TRUE) {
-        echo "Combo excluído com sucesso!";
-        header("Location: index.php"); // Redireciona de volta para a página inicial após exclusão
-        exit();
-    } else {
-        echo "Erro ao excluir: " . $conn->error;
+    $id = (int)$_GET['id'];
+    
+    // Primeiro busca a imagem atual para deletar
+    $sql = "SELECT url_foto FROM combos WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($result->num_rows > 0) {
+        $combo = $result->fetch_assoc();
+        if (file_exists($combo['url_foto'])) {
+            unlink($combo['url_foto']); // Remove a imagem antiga
+        }
     }
-} else {
-    echo "ID do combo não especificado.";
+
+    // Deleta o combo
+    $sql = "DELETE FROM combos WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    
+    if ($stmt->execute()) {
+        header("Location: /admin/gerenciar_combos.php?sucesso=1");
+    } else {
+        header("Location: /admin/gerenciar_combos.php?erro=1");
+    }
+    exit();
 }
 
-$conn->close();
-?>
+header("Location: /admin/gerenciar_combos.php");
+exit();
