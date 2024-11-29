@@ -1,7 +1,7 @@
 <?php
 require_once 'check_auth.php';
-include_once '../header.php';
-include_once '../config/database.php';
+require_once 'header_admin.php';
+require_once '../config/database.php';
 
 // Buscar estatísticas
 $sql = "SELECT COUNT(*) as total_combos FROM combos";

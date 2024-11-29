@@ -1,7 +1,7 @@
 <?php
 require_once 'check_auth.php';
-include_once '../header.php';
-include_once '../config/database.php';
+require_once 'header_admin.php';
+require_once '../config/database.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome_combo = $conn->real_escape_string($_POST['nome_combo']);

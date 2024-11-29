@@ -1,3 +1,7 @@
+<?php
+require_once 'header_admin.php';
+require_once '../config/database.php';
+?>
 <!DOCTYPE html>
 <html lang="pt">
 <head>

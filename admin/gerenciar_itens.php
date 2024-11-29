@@ -1,6 +1,6 @@
 <?php
-include 'header.php';
-include 'config/database.php';
+require_once 'header_admin.php';
+require_once '../config/database.php';
 
 $sql = "SELECT * FROM itens";
 $result = $conn->query($sql);
