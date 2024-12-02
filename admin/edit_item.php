@@ -1,5 +1,5 @@
 <?php
-require_once '../check_auth.php';
+require_once 'check_auth.php';
 require_once 'header_admin.php';
 require_once '../config/database.php';
 
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-include '../header.php';
+//include '../header.php';
 ?>
 
 <div class="container">

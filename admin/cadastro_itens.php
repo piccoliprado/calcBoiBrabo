@@ -1,5 +1,6 @@
 <?php
 require_once 'check_auth.php';
+require_once 'header_admin.php';
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -29,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Cadastro de Itens</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
     <h1>Cadastrar Novo Item</h1>

@@ -11,8 +11,56 @@ body {
     background-color: #f5f5f5;
 }
 
+.form-group a {
+    color: #e63946;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.form-group a:hover {
+    text-decoration: underline;
+}
+
+
+/* Espaçamento flex para conteúdo principal */
+main {
+    padding-top: 80px; /* Espaçamento para compensar o header fixo */
+}
+
+/* Layout geral */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Garante que o body ocupe a altura total da janela */
+    margin: 0;
+}
+
+
+
+/* Estilo do footer */
+.main-footer {
+    text-align: center;
+    background-color: #2b2d42;
+    color: white;
+    padding: 1rem;
+    font-size: 0.9rem;
+    margin-top: auto; /* Empurra o footer para o fim da página */
+}
+
+.main-header {
+    height: 80px; /* Ajuste a altura conforme o tamanho do seu cabeçalho */
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+
+
 /* Header e Navegação */
 .main-header {
+    height: 80px; /* Ajuste a altura conforme o tamanho do seu cabeçalho */
+
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     position: fixed;
