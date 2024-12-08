@@ -1,0 +1,46 @@
+.items-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.item-card {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.item-card h4 {
+    margin: 0 0 0.5rem 0;
+    color: #333;
+}
+
+.item-card p {
+    margin: 0 0 1rem 0;
+    color: #666;
+}
+
+.add-item-btn {
+    background: #e63946;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-item-btn:hover {
+    background: #d62b39;
+}

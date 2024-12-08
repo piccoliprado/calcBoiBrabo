@@ -3,7 +3,7 @@ include 'header.php'; // Inclui o cabeçalho
 include 'config/database.php';
 
 // Consultar os dados no banco
-$sql = "SELECT * FROM combos ORDER BY id DESC";
+$sql = "SELECT * FROM combos WHERE ativo = 1 ORDER BY id DESC";
 $result = $conn->query($sql);
 ?>
 
@@ -11,9 +11,20 @@ $result = $conn->query($sql);
     <section class="combos-grid">
         <?php if ($result && $result->num_rows > 0): ?>
             <?php while ($combo = $result->fetch_assoc()): ?>
-                <div class="combo-card">
-                    <img src="<?php echo htmlspecialchars($combo['url_foto']); ?>" 
-                         alt="<?php echo htmlspecialchars($combo['nome_combo']); ?>">
+                <div class="combo-card" onclick="mostrarDetalhes(<?php echo htmlspecialchars($combo['id']); ?>)">
+                    <div class="combo-image">
+                        <?php
+                        $imageUrl = $combo['url_foto'];
+                        // Se o caminho não começar com /, adiciona
+                        if (strpos($imageUrl, '/') !== 0) {
+                        $imageUrl = '/' . $imageUrl;
+                        }
+                        ?>
+                        <img src="<?php echo htmlspecialchars($imageUrl); ?>" 
+                            alt="<?php echo htmlspecialchars($combo['nome_combo']); ?>"
+                            style="width: 100%; height: 100%; object-fit: cover;"
+                            onerror="this.src='/uploads/placeholder.jpg'">
+                    </div>
                     <div class="combo-info">
                         <h2><?php echo htmlspecialchars($combo['nome_combo']); ?></h2>
                         <p class="preco">R$ <?php echo number_format($combo['preco'], 2, ',', '.'); ?></p>

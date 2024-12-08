@@ -1,0 +1,155 @@
+/* /css/cadastro-item.css */
+.cadastro-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+    margin-top: 80px; /* Espaço para o header fixo */
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Card principal */
+.card-cadastro {
+    background-color: #262628;
+    border-radius: 15px;
+    padding: 2.5rem;
+    color: #fbfbfb;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-cadastro h2 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    color: #fbfbfb;
+}
+
+/* Formulário */
+.form-cadastro {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 600px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-size: 1.1rem;
+    color: #fbfbfb;
+}
+
+.form-group input {
+    padding: 0.75rem;
+    border: 1px solid rgba(251, 251, 251, 0.2);
+    border-radius: 8px;
+    background: rgba(251, 251, 251, 0.1);
+    color: #fbfbfb;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #8f7355;
+    background: rgba(251, 251, 251, 0.15);
+}
+
+/* Botões */
+.button-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.btn-cadastrar {
+    padding: 0.75rem 2rem;
+    background: #fbfbfb;
+    color: #262628;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-cadastrar:hover {
+    background: #e6e6e6;
+    transform: translateY(-2px);
+}
+
+.btn-voltar {
+    padding: 0.75rem 2rem;
+    background: transparent;
+    color: #fbfbfb;
+    border: 1px solid #fbfbfb;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-voltar:hover {
+    background: rgba(251, 251, 251, 0.1);
+}
+
+/* Mensagens de sucesso/erro */
+.message {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.success {
+    background: rgba(46, 125, 50, 0.2);
+    color: #81c784;
+}
+
+.error {
+    background: rgba(198, 40, 40, 0.2);
+    color: #ef5350;
+}
+
+/* Estilização do select */
+.form-group select {
+    padding: 0.75rem;
+    border: 1px solid rgba(251, 251, 251, 0.2);
+    border-radius: 8px;
+    background: rgba(251, 251, 251, 0.1);
+    color: #fbfbfb;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    appearance: none; /* Remove o estilo padrão do navegador */
+    cursor: pointer;
+    width: 100%;
+    /* Adiciona uma seta customizada */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23fbfbfb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem;
+    padding-right: 2.5rem;
+}
+
+.form-group select:focus {
+    outline: none;
+    border-color: #8f7355;
+    background-color: rgba(251, 251, 251, 0.15);
+}
+
+/* Estilização das opções do select */
+.form-group select option {
+    background-color: #262628;
+    color: #fbfbfb;
+    padding: 0.75rem;
+}
+
+.form-group select:hover {
+    border-color: #8f7355;
+}

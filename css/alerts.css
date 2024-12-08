@@ -1,0 +1,65 @@
+/* Container principal dos alertas */
+.alerts-section {
+    width: 100%;
+    margin-top: 2rem;
+    background-color: #262628;
+    border-radius: 15px;
+    padding: 2rem;
+    color: #fbfbfb;
+}
+
+.alerts-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.alerts-section h2 i {
+    color: #8f7355;
+}
+
+/* Grid para organizar os alertas */
+.alerts-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Estilo do card de alerta */
+.alert-card {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    border-radius: 12px;
+    background: rgba(251, 251, 251, 0.1);
+    transition: all 0.3s ease;
+}
+
+.alert-card:hover {
+    transform: translateX(5px);
+    background: rgba(251, 251, 251, 0.15);
+}
+
+/* Ícone do alerta */
+.alert-card i {
+    font-size: 1.5rem;
+    color: #8f7355;
+}
+
+/* Conteúdo do alerta */
+.alert-content {
+    flex: 1;
+}
+
+.alert-content h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+}
+
+.alert-content p {
+    opacity: 0.9;
+    font-size: 0.95rem;
+}

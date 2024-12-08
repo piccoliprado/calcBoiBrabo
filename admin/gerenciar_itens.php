@@ -6,15 +6,20 @@ $sql = "SELECT * FROM itens";
 $result = $conn->query($sql);
 ?>
 
-<div class="container">
-    <div class="card">
-        <h1 class="title">Gerenciar Itens</h1>
+<div class="gerenciar-container">
+    <div class="card-gerenciar">
+        <h1>Gerenciar Itens</h1>
+        
+        <?php if (isset($_GET['sucesso'])): ?>
+            <div class="message success">Item atualizado com sucesso!</div>
+        <?php endif; ?>
         
         <table class="data-table">
             <thead>
                 <tr>
                     <th>Nome</th>
                     <th>Custo</th>
+                    <th>Unidade</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -22,13 +27,14 @@ $result = $conn->query($sql);
                 <?php while ($row = $result->fetch_assoc()): ?>
                 <tr>
                     <td><?php echo htmlspecialchars($row['nome']); ?></td>
-                    <td>R$ <?php echo number_format($row['custo'], 2, ',', '.'); ?></td>
+                    <td class="valor">R$ <?php echo number_format($row['custo'], 2, ',', '.'); ?></td>
+                    <td><?php echo htmlspecialchars($row['unidade_medida']); ?></td>
                     <td class="actions">
-                        <a href="edit_item.php?id=<?php echo $row['id']; ?>" class="edit-btn">
+                        <a href="edit_item.php?id=<?php echo $row['id']; ?>" class="btn-edit">
                             <i class="fas fa-edit"></i> Editar
                         </a>
                         <a href="delete_item.php?id=<?php echo $row['id']; ?>" 
-                           class="delete-btn"
+                           class="btn-delete"
                            onclick="return confirm('Tem certeza que deseja excluir este item?')">
                             <i class="fas fa-trash"></i> Excluir
                         </a>

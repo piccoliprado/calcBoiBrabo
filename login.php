@@ -32,45 +32,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-include 'header.php';
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Login - Área do Proprietário</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Boi Brabo</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
-    <div class="form">
-        <div class="card">
-            <h1 class="title">Login - Área do Proprietário</h1>
+    <div class="login-container">
+        <div class="login-card">
+            <img src="img/boilogo.png" alt="Logo Boi Brabo" class="login-logo">
             
             <?php if (isset($erro)): ?>
-                <div class="error-message"><?php echo $erro; ?></div>
+                <div class="alert alert-danger"><?php echo $erro; ?></div>
             <?php endif; ?>
             
-            <form method="POST">
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" name="email" required>
-                </div>
-                
-                <div class="form-group">
-                    <label>Senha</label>
-                    <input type="password" name="senha" required>
-                </div>
-                
-                <div class="form-group">
-                    <button type="submit" class="btn">Entrar</button>
-                </div>
+            <form method="POST" class="login-form">
+                <input type="email" name="email" placeholder="Login do usuário" required class="login-input">
+                <input type="password" name="senha" placeholder="Senha" required class="login-input">
+                <button type="submit" class="login-button">Entrar</button>
+                <button type="submit" class="login-button">Cadastrar</button>
             </form>
             
-            <!-- Link para a página de cadastro de novo usuário -->
-            <div class="form-group">
-                <p>Ainda não tem uma conta? <a href="cadastrar_usuario.php">Cadastrar Novo Usuário</a></p>
-            </div>
+           
         </div>
     </div>
 </body>

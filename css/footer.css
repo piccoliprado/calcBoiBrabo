@@ -1,0 +1,13 @@
+.main-footer {
+    background-color: #262628;
+    color: #fbfbfb;
+    padding: 1rem;
+    text-align: center;
+    margin-top: auto; /* Isso mantém o footer no final da página */
+    font-size: 0.9rem;
+}
+
+.main-footer p {
+    margin: 0;
+    line-height: 1.6;
+}

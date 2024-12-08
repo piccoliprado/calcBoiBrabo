@@ -1,46 +1,79 @@
 <?php
 require_once 'check_auth.php';
 require_once 'header_admin.php';
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "calcbc";
+require_once '../config/database.php';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Conexão falhou: " . $conn->connect_error);
-}
+$message = '';
+$messageType = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nome = $_POST['nome'];
+    $nome = $conn->real_escape_string($_POST['nome']);
     $custo = $_POST['custo'];
+    $unidade_medida = $_POST['unidade_medida'];
 
-    $sql = "INSERT INTO itens (nome, custo) VALUES ('$nome', '$custo')";
-    if ($conn->query($sql) === TRUE) {
-        echo "Item cadastrado com sucesso!";
+    $sql = "INSERT INTO itens (nome, custo) VALUES (?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sd", $nome, $custo);
+    
+    if ($stmt->execute()) {
+        $message = "Item cadastrado com sucesso!";
+        $messageType = "success";
     } else {
-        echo "Erro: " . $sql . "<br>" . $conn->error;
+        $message = "Erro ao cadastrar item: " . $conn->error;
+        $messageType = "error";
     }
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Cadastro de Itens</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Itens - Boi Brabo</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/cadastro-item.css">
+    <link rel="stylesheet" href="/calcBoiBrabo/css/admin-header.css">
 </head>
 <body>
-    <h1>Cadastrar Novo Item</h1>
-    <form method="POST" action="">
-        <label>Nome do Item:</label>
-        <input type="text" name="nome" required><br>
-        <label>Custo:</label>
-        <input type="number" step="0.01" name="custo" required><br>
-        <button type="submit">Cadastrar Item</button>
-    </form>
+    <div class="cadastro-container">
+        <div class="card-cadastro">
+            <h2>Cadastrar Novo Item</h2>
+            
+            <?php if ($message): ?>
+                <div class="message <?php echo $messageType; ?>">
+                    <?php echo $message; ?>
+                </div>
+            <?php endif; ?>
+
+            <form method="POST" class="form-cadastro">
+                <div class="form-group">
+                    <label for="nome">Nome do Item:</label>
+                    <input type="text" id="nome" name="nome" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="unidade_medida">Unidade de Medida:</label>
+                    <select id="unidade_medida" name="unidade_medida" required>
+                        <option value="KG">Quilograma (KG)</option>
+                        <option value="UN">Unidade (UN)</option>
+                        <option value="PC">Peça (PC)</option>
+                        <option value="GR">Grama (GR)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="custo">Custo (R$):</label>
+                    <input type="number" id="custo" name="custo" step="0.01" required>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="btn-cadastrar">Cadastrar Item</button>
+                    <a href="gerenciar_itens.php" class="btn-voltar">Voltar</a>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
 

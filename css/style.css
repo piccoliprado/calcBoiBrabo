@@ -5,6 +5,8 @@
     box-sizing: border-box;
 }
 
+
+
 body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
@@ -37,16 +39,17 @@ body {
 
 
 
-/* Estilo do footer */
+
+/* Estilo do footer 
 .main-footer {
     text-align: center;
     background-color: #2b2d42;
     color: white;
     padding: 1rem;
     font-size: 0.9rem;
-    margin-top: auto; /* Empurra o footer para o fim da página */
+    margin-top: auto;  Empurra o footer para o fim da página 
 }
-
+*/
 .main-header {
     height: 80px; /* Ajuste a altura conforme o tamanho do seu cabeçalho */
     position: fixed;
@@ -101,7 +104,7 @@ body {
     color: #e63946;
 }
 
-/* Dropdown Menu */
+/* Dropdown Menu 
 .dropdown {
     position: relative;
 }
@@ -143,7 +146,7 @@ body {
 .dropdown:hover .dropdown-menu {
     display: block;
 }
-
+*/
 /* Página Principal (Pública) */
 .home-container {
     margin-top: 80px;
@@ -235,7 +238,7 @@ body {
     line-height: 1.5;
 }
 
-/* Área Administrativa */
+/* Área Administrativa 
 .dashboard-grid {
     display: grid;
     gap: 2rem;
@@ -277,7 +280,7 @@ body {
     margin-bottom: 1rem;
 }
 
-/* Botões e Ações */
+/* Botões e Ações 
 .btn {
     display: inline-block;
     padding: 0.75rem 1.5rem;
@@ -302,8 +305,8 @@ body {
 .btn-secondary:hover {
     background-color: #5a6268;
 }
-
-.login-btn {
+*/
+.login-btnn {
     padding: 0.5rem 1rem;
     background-color: #e63946;
     color: white;
@@ -424,3 +427,4 @@ body {
 .mt-2 { margin-top: 1rem; }
 .mt-3 { margin-top: 1.5rem; }
 .mt-4 { margin-top: 2rem; }
+

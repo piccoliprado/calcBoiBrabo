@@ -1,10 +1,15 @@
 <?php
-require_once '../check_auth.php';
+require_once 'check_auth.php';
 require_once 'header_admin.php';
 require_once '../config/database.php';
 
 if (isset($_GET['id'])) {
     $id = (int)$_GET['id'];
+
+    $sql = "DELETE FROM combo_itens WHERE combo_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
     
     // Primeiro busca a imagem atual para deletar
     $sql = "SELECT url_foto FROM combos WHERE id = ?";
@@ -24,12 +29,9 @@ if (isset($_GET['id'])) {
     $sql = "DELETE FROM combos WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
+    $stmt->execute();
     
-    if ($stmt->execute()) {
-        header("Location: /admin/gerenciar_combos.php?sucesso=1");
-    } else {
-        header("Location: /admin/gerenciar_combos.php?erro=1");
-    }
+    header("Location: gerenciar_combos.php?sucesso=1");
     exit();
 }
 

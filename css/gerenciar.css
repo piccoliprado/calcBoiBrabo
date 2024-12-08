@@ -1,0 +1,211 @@
+/* /css/gerenciar.css */
+
+/* Container principal */
+.gerenciar-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+    margin-top: 80px; /* Espaço para o header fixo */
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Card principal */
+.card-gerenciar {
+    background-color: #262628;
+    border-radius: 15px;
+    padding: 2.5rem;
+    color: #fbfbfb;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Título da página */
+/* Atualização no gerenciar.css */
+
+/* Título da página */
+.card-gerenciar h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #fbfbfb;
+    font-weight: 600; /* Mais negrito */
+}
+
+/* Cabeçalho da tabela */
+.data-table thead th {
+    padding: 1.2rem 1rem;
+    text-align: left;
+    color: #8f7355; /* Mantendo a cor marrom */
+    font-weight: 600; /* Mais negrito */
+    font-size: 1.1rem;
+    background-color: #fbfbfb; /* Fundo branco como na imagem */
+}
+
+/* Células da tabela */
+.data-table td {
+    padding: 1rem;
+    color: #fbfbfb;
+    font-size: 1.1rem; /* Aumentando tamanho da fonte */
+    background-color: #333; /* Fundo mais escuro para as células */
+}
+
+/* Preço */
+.data-table .valor {
+    color: #8f7355; /* Cor marrom */
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+/* Imagem em miniatura */
+.thumb-image {
+    width: 80px; /* Um pouco maior */
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+/* Botões de ação */
+.btn-edit, .btn-delete {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+/* Status (Ativo/Inativo) */
+.btn-toggle {
+    background: transparent;
+    border: 1px solid #8f7355;
+    color: #8f7355;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+/* Layout da tabela */
+.data-table {
+    border-collapse: separate;
+    border-spacing: 0 0.8rem; /* Espaçamento entre as linhas */
+}
+
+/* Linhas da tabela */
+.data-table tbody tr {
+    background: #333; /* Fundo mais escuro */
+    transition: all 0.3s ease;
+}
+
+.data-table tbody tr:hover {
+    background: #404040; /* Um pouco mais claro no hover */
+}
+
+/* Primeira e última célula de cada linha (para bordas arredondadas) */
+.data-table td:first-child {
+    border-radius: 8px 0 0 8px;
+}
+
+.data-table td:last-child {
+    border-radius: 0 8px 8px 0;
+}
+
+/* Coluna de preço/custo */
+.data-table .valor {
+    color: #8f7355;
+    font-weight: 500;
+}
+
+
+
+/* Imagem em miniatura (para combos) */
+.thumb-image {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    display: block; 
+}
+
+/* Botões de ação */
+.actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn-edit, .btn-delete, .btn-toggle {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-edit {
+    background: #fbfbfb;
+    color: #262628;
+}
+
+.btn-edit:hover {
+    background: #e6e6e6;
+    transform: translateY(-2px);
+}
+
+.btn-delete {
+    background: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+    border: 1px solid #dc3545;
+}
+
+.btn-delete:hover {
+    background: rgba(220, 53, 69, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Botão de alternar status (para combos) */
+.btn-toggle {
+    background: transparent;
+    border: 1px solid #8f7355;
+    color: #8f7355;
+}
+
+.btn-toggle.ativo {
+    background: rgba(143, 115, 83, 0.1);
+}
+
+.btn-toggle:hover {
+    background: rgba(143, 115, 83, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Mensagens de feedback */
+.message {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.success {
+    background: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+    border: 1px solid #28a745;
+}
+
+.error {
+    background: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+    border: 1px solid #dc3545;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .data-table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+}
+

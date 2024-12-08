@@ -1,5 +1,5 @@
 <?php
-require_once '../check_auth.php';
+require_once 'check_auth.php';
 require_once 'header_admin.php';
 require_once '../config/database.php';
 
@@ -24,44 +24,45 @@ if (isset($_GET['id'])) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = (int)$_POST['id'];
-    $nome_combo = $conn->real_escape_string($_POST['nome_combo']);
-    $preco = (float)$_POST['preco'];
-    $margem_lucro = (float)$_POST['margem_lucro'];
+    $nome_combo = $_POST['nome_combo'];
+    $preco = $_POST['preco'];
+    $descricao = $_POST['descricao'];
+    $margem_lucro = $_POST['margem_lucro'];
+
 
     if (!empty($_FILES['foto']['name'])) {
-        $target_dir = "../uploads/";
-        $imageFileType = strtolower(pathinfo($_FILES["foto"]["name"], PATHINFO_EXTENSION));
-        $newFileName = uniqid() . '.' . $imageFileType;
-        $target_file = $target_dir . $newFileName;
-
-        if (getimagesize($_FILES["foto"]["tmp_name"]) !== false) {
-            // Remove a imagem antiga se existir
-            if (file_exists($combo['url_foto'])) {
-                unlink($combo['url_foto']);
-            }
-
-            if (move_uploaded_file($_FILES["foto"]["tmp_name"], $target_file)) {
-                $sql = "UPDATE combos SET nome_combo = ?, preco = ?, margem_lucro = ?, url_foto = ? WHERE id = ?";
-                $stmt = $conn->prepare($sql);
-                $stmt->bind_param("sddsi", $nome_combo, $preco, $margem_lucro, $target_file, $id);
-            }
-        } else {
-            $erro = "O arquivo enviado não é uma imagem válida.";
+        $sql = "UPDATE combos SET nome_combo = ?, preco = ?, descricao = ?, margem_lucro = ?, url_foto = ? WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        
+        // Mudando os tipos dos parâmetros para corresponder aos dados
+        if(!$stmt->bind_param("sssdsi", $nome_combo, $preco, $descricao, $margem_lucro, $target_file, $id)) {
+            echo "Erro no bind_param: " . $stmt->error;
         }
     } else {
-        $sql = "UPDATE combos SET nome_combo = ?, preco = ?, margem_lucro = ? WHERE id = ?";
+        $sql = "UPDATE combos SET nome_combo = ?, preco = ?, descricao = ?, margem_lucro = ? WHERE id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sddi", $nome_combo, $preco, $margem_lucro, $id);
+        
+        if(!$stmt->bind_param("sssdi", $nome_combo, $preco, $descricao, $margem_lucro, $id)) {
+            echo "Erro no bind_param: " . $stmt->error;
+        }
     }
 
-    if (!$erro && $stmt->execute()) {
+    if ($stmt->execute()) {
+        
+        // Vamos verificar o que foi realmente salvo
+        $verify_sql = "SELECT * FROM combos WHERE id = ?";
+        $verify_stmt = $conn->prepare($verify_sql);
+        $verify_stmt->bind_param("i", $id);
+        $verify_stmt->execute();
+        $result = $verify_stmt->get_result();
+        $saved_data = $result->fetch_assoc();
+                
         $sucesso = "Combo atualizado com sucesso!";
     } else {
-        $erro = $erro ?: "Erro ao atualizar o combo.";
+        $erro = "Erro ao atualizar o combo: " . $stmt->error;
     }
 }
 
-include '../header.php';
 ?>
 
 <div class="container">
@@ -82,6 +83,11 @@ include '../header.php';
             <div class="form-group">
                 <label>Nome do Combo</label>
                 <input type="text" name="nome_combo" value="<?php echo htmlspecialchars($combo['nome_combo']); ?>" required>
+            </div>
+
+            <div class="form-group">
+                <label>Descrição do Combo</label>
+                <textarea name="descricao" class="form-control" rows="4"><?php echo htmlspecialchars($combo['descricao'] ?? ''); ?></textarea>
             </div>
 
             <div class="form-group">
