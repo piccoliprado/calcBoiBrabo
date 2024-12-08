@@ -1,9 +1,8 @@
 <?php
-// Conexão com o banco de dados
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "calcbc"; // Substitua pelo nome do seu banco de dados
+$dbname = "calcbc";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -11,11 +10,9 @@ if ($conn->connect_error) {
     die("Erro de conexão: " . $conn->connect_error);
 }
 
-$erro = ""; // Variável para armazenar mensagens de erro
+$erro = "";
 
-// Verifica se o formulário foi enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Recebe os dados do formulário e faz uma validação simples
     $nome = trim($_POST['nome']);
     $email = trim($_POST['email']);
     $senha = $_POST['senha'];
@@ -26,21 +23,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif ($senha !== $senhaConfirmada) {
         $erro = "As senhas não coincidem.";
     } else {
-        // Criptografa a senha
         $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
 
-        // Verifica se o email já existe no banco de dados
         $sql = "SELECT * FROM usuarios WHERE email = '$email'";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
             $erro = "Este email já está cadastrado. Por favor, faça login ou use outro email.";
         } else {
-            // Insere o usuário no banco de dados
             $sql = "INSERT INTO usuarios (nome, email, senha) VALUES ('$nome', '$email', '$senhaHash')";
 
             if ($conn->query($sql) === TRUE) {
-                // Cadastro bem-sucedido, redireciona para a página de login
                 header("Location: login.php");
                 exit();
             } else {
@@ -59,7 +52,7 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar Novo Usuário</title>
-    <link rel="stylesheet" href="css/style.css"> <!-- Inclua o link para seu CSS -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="form">

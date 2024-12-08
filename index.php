@@ -1,8 +1,7 @@
 <?php
-include 'header.php'; // Inclui o cabeçalho
+include 'header.php';
 include 'config/database.php';
 
-// Consultar os dados no banco
 $sql = "SELECT * FROM combos ORDER BY id DESC";
 $result = $conn->query($sql);
 ?>
@@ -35,6 +34,6 @@ $result = $conn->query($sql);
 </main>
 
 <?php
-$conn->close(); // Fecha a conexão com o banco
-include 'footer.php'; // Inclui o rodapé
+$conn->close();
+include 'footer.php';
 ?>

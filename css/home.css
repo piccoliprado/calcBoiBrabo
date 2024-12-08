@@ -1,15 +1,13 @@
-/* Dashboard principal */
 .dashboard-grid {
     display: grid;
     gap: 2rem;
     padding: 2rem;
-    margin-top: 80px; /* Espaço para o header fixo */
+    margin-top: 80px; 
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
 }
 
-/* Seção de boas-vindas */
 .welcome-section {
     background-color: #262628;
     color: #fbfbfb;
@@ -27,7 +25,6 @@
     opacity: 0.9;
 }
 
-/* Cards de estatísticas */
 .stats-section {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -53,7 +50,6 @@
     margin-bottom: 1rem;
 }
 
-/* Ações rápidas */
 .quick-actions {
     margin-top: 2rem;
 }
@@ -120,20 +116,16 @@
     border-radius: 6px;
 }
 
-/* Container Principal 
-   Mantemos o flex para organização vertical dos elementos */
    .dashboard-container {
     display: flex;
     flex-direction: column;
     gap: 2rem;
     padding: 2rem;
-    margin-top: 80px; /* Espaço para o header fixo */
+    margin-top: 80px;
     margin-left: auto;
     margin-right: auto;
 }
 
-/* Card de Boas-vindas
-   Agora vai ocupar toda a largura disponível */
 .welcome-card {
     background-color: #262628;
     border-radius: 15px;
@@ -142,22 +134,20 @@
     position: relative;
     overflow: hidden;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    width: 100%; /* Ocupa toda a largura */
+    width: 100%;
 }
 
-/* Efeito decorativo no card */
 .welcome-card::before {
     content: '';
     position: absolute;
     top: 0;
     right: 0;
-    width: 40%; /* Aumentamos a área do gradiente */
+    width: 40%;
     height: 100%;
     background: linear-gradient(45deg, transparent, rgba(143, 115, 85, 0.1));
     pointer-events: none;
 }
 
-/* Título de boas-vindas */
 .welcome-card h1 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
@@ -168,18 +158,15 @@
     font-size: 1.2rem;
     opacity: 0.9;
     line-height: 1.6;
-    max-width: 800px; /* Limita a largura do texto para melhor legibilidade */
+    max-width: 800px;
 }
 
-/* Container para os cards de estatísticas
-   Agora em layout horizontal */
 .stats-container {
     display: flex;
     gap: 2rem;
     width: 100%;
 }
 
-/* Cards de Estatísticas */
 .stat-card {
     flex: 1;
     background: #fbfbfb;
@@ -194,14 +181,12 @@
     transform: translateY(-5px);
 }
 
-/* Ícone do card de estatística */
 .stat-card i {
     font-size: 2.5rem;
     color: #8f7355;
     margin-bottom: 1rem;
 }
 
-/* Conteúdo do card de estatística */
 .stat-card h3 {
     font-size: 1.2rem;
     color: #262628;
@@ -214,7 +199,6 @@
     color: #8f7355;
 }
 
-/* Seção de Ações Rápidas */
 .quick-actions {
     grid-column: span 12;
     background: #fbfbfb;
@@ -223,26 +207,24 @@
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
-/* Grid de Ações */
 .actions-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1rem;
 }
 
-/* Media Queries para Responsividade */
 @media (min-width: 768px) {
     .welcome-card {
-        grid-column: span 8; /* Em telas maiores, ocupa 8 colunas */
+        grid-column: span 8;
     }
     
     .stats-grid {
-        grid-column: span 4; /* Estatísticas ocupam 4 colunas */
+        grid-column: span 4;
     }
 }
 
 @media (min-width: 1200px) {
     .quick-actions {
-        grid-column: span 12; /* Em telas grandes, ações ocupam toda largura */
+        grid-column: span 12;
     }
 }

@@ -11,7 +11,6 @@ if (isset($_GET['id'])) {
     $stmt->bind_param("i", $id);
     $stmt->execute();
     
-    // Primeiro busca a imagem atual para deletar
     $sql = "SELECT url_foto FROM combos WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
@@ -21,11 +20,10 @@ if (isset($_GET['id'])) {
     if ($result->num_rows > 0) {
         $combo = $result->fetch_assoc();
         if (file_exists($combo['url_foto'])) {
-            unlink($combo['url_foto']); // Remove a imagem antiga
+            unlink($combo['url_foto']);
         }
     }
 
-    // Deleta o combo
     $sql = "DELETE FROM combos WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);

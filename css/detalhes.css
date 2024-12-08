@@ -1,4 +1,3 @@
-/* Estilos para os cards de combo */
 .combo-card {
     background: white;
     border-radius: 12px;
@@ -10,7 +9,7 @@
 
 .combo-image {
     width: 100%;
-    height: 300px; /* Altura fixa para todas as imagens */
+    height: 300px;
     overflow: hidden;
     position: relative;
 }
@@ -18,7 +17,7 @@
 .combo-detalhes .combo-imagem {
     width: 100%;
     max-width: 800px;
-    height: 400px; /* Altura maior para a página de detalhes */
+    height: 400px;
     margin: 0 auto;
     overflow: hidden;
     border-radius: 12px;
@@ -27,7 +26,7 @@
 .combo-card img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Isso faz a imagem cobrir todo o espaço mantendo a proporção */
+    object-fit: cover;
     display: block;
 }
 
@@ -37,7 +36,6 @@
     object-fit: cover;
 }
 
-/* Estilos para a página de detalhes */
 .combo-detalhes {
     background: white;
     border-radius: 12px;
@@ -96,7 +94,6 @@
     left: 0;
 }
 
-/* Adicione um efeito de carregamento suave */
 .combo-image img:not([src]), 
 .combo-image img[src=""] {
     opacity: 0;

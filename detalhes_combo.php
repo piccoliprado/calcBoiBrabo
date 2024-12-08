@@ -12,7 +12,6 @@ if (isset($_GET['id'])) {
     
     if ($result->num_rows > 0) {
         $combo = $result->fetch_assoc();
-        // Aplica a mesma lógica de correção da URL da imagem
         $imageUrl = $combo['url_foto'];
         if (strpos($imageUrl, '../') === 0) {
             $imageUrl = substr($imageUrl, 3);

@@ -1,6 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'].'/calcBoiBrabo/config/auth.php';
-requireLogin(); // Força autenticação em todas as páginas admin
+requireLogin();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -8,7 +8,7 @@ requireLogin(); // Força autenticação em todas as páginas admin
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel Administrativo - Calculadora de Combos</title>
-    <link rel="stylesheet" href="/calcBoiBrabo/css/style.css"> <!-- Caminho para o CSS -->
+    <link rel="stylesheet" href="/calcBoiBrabo/css/style.css">
     <link rel="stylesheet" href="/calcBoiBrabo/css/admin-header.css">
     <link rel="stylesheet" href="/calcBoiBrabo/css/home.css">
     <link rel="stylesheet" href="/calcBoiBrabo/css/recent-items.css">

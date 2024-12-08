@@ -1,18 +1,14 @@
-/* /css/gerenciar.css */
-
-/* Container principal */
 .gerenciar-container {
     display: flex;
     flex-direction: column;
     gap: 2rem;
     padding: 2rem;
-    margin-top: 80px; /* Espaço para o header fixo */
+    margin-top: 80px;
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
 }
 
-/* Card principal */
 .card-gerenciar {
     background-color: #262628;
     border-radius: 15px;
@@ -21,51 +17,42 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Título da página */
-/* Atualização no gerenciar.css */
-
-/* Título da página */
 .card-gerenciar h1 {
     font-size: 2rem;
     margin-bottom: 2rem;
     color: #fbfbfb;
-    font-weight: 600; /* Mais negrito */
+    font-weight: 600;
 }
 
-/* Cabeçalho da tabela */
 .data-table thead th {
     padding: 1.2rem 1rem;
     text-align: left;
-    color: #8f7355; /* Mantendo a cor marrom */
-    font-weight: 600; /* Mais negrito */
+    color: #8f7355;
+    font-weight: 600; 
     font-size: 1.1rem;
-    background-color: #fbfbfb; /* Fundo branco como na imagem */
+    background-color: #fbfbfb; 
 }
 
-/* Células da tabela */
 .data-table td {
     padding: 1rem;
     color: #fbfbfb;
-    font-size: 1.1rem; /* Aumentando tamanho da fonte */
-    background-color: #333; /* Fundo mais escuro para as células */
+    font-size: 1.1rem;
+    background-color: #333;
 }
 
-/* Preço */
 .data-table .valor {
-    color: #8f7355; /* Cor marrom */
+    color: #8f7355;
     font-weight: 500;
     font-size: 1.1rem;
 }
 
-/* Imagem em miniatura */
 .thumb-image {
-    width: 80px; /* Um pouco maior */
+    width: 80px;
     height: 80px;
     object-fit: cover;
     border-radius: 4px;
 }
 
-/* Botões de ação */
 .btn-edit, .btn-delete {
     padding: 0.5rem 1rem;
     border-radius: 4px;
@@ -73,7 +60,6 @@
     font-size: 1rem;
 }
 
-/* Status (Ativo/Inativo) */
 .btn-toggle {
     background: transparent;
     border: 1px solid #8f7355;
@@ -83,23 +69,20 @@
     font-weight: 500;
 }
 
-/* Layout da tabela */
 .data-table {
     border-collapse: separate;
-    border-spacing: 0 0.8rem; /* Espaçamento entre as linhas */
+    border-spacing: 0 0.8rem;
 }
 
-/* Linhas da tabela */
 .data-table tbody tr {
-    background: #333; /* Fundo mais escuro */
+    background: #333;
     transition: all 0.3s ease;
 }
 
 .data-table tbody tr:hover {
-    background: #404040; /* Um pouco mais claro no hover */
+    background: #404040;
 }
 
-/* Primeira e última célula de cada linha (para bordas arredondadas) */
 .data-table td:first-child {
     border-radius: 8px 0 0 8px;
 }
@@ -108,15 +91,11 @@
     border-radius: 0 8px 8px 0;
 }
 
-/* Coluna de preço/custo */
 .data-table .valor {
     color: #8f7355;
     font-weight: 500;
 }
 
-
-
-/* Imagem em miniatura (para combos) */
 .thumb-image {
     width: 60px;
     height: 60px;
@@ -124,7 +103,6 @@
     display: block; 
 }
 
-/* Botões de ação */
 .actions {
     display: flex;
     gap: 1rem;
@@ -162,7 +140,6 @@
     transform: translateY(-2px);
 }
 
-/* Botão de alternar status (para combos) */
 .btn-toggle {
     background: transparent;
     border: 1px solid #8f7355;
@@ -178,7 +155,6 @@
     transform: translateY(-2px);
 }
 
-/* Mensagens de feedback */
 .message {
     padding: 1rem;
     border-radius: 8px;
@@ -197,7 +173,6 @@
     border: 1px solid #dc3545;
 }
 
-/* Responsividade */
 @media (max-width: 768px) {
     .data-table {
         display: block;

@@ -1,24 +1,22 @@
-/* Container principal que centraliza o card de login */
 .login-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #f5f5f5; /* Mantemos o fundo claro para contraste */
+  background-color: #f5f5f5;
 }
 
-/* Card principal do login */
+
 .login-card {
-  background: #262628; /* Cor principal conforme solicitado */
+  background: #262628;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Sombra mais pronunciada para destacar do fundo */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   width: 100%;
   max-width: 400px;
   padding: 2rem;
-  color: #fbfbfb; /* Texto em branco para contraste com o fundo escuro */
+  color: #fbfbfb; 
 }
 
-/* Estilo para a logo */
 .login-logo {
   width: 120px;
   height: auto;
@@ -26,26 +24,24 @@
   display: block;
 }
 
-/* Formulário de login */
 .login-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-/* Campos de entrada */
 .login-input {
   width: 100%;
   padding: 0.75rem;
-  border: 1px solid rgba(251, 251, 251, 0.2); /* Borda sutil em branco transparente */
+  border: 1px solid rgba(251, 251, 251, 0.2);
   border-radius: 4px;
   font-size: 1rem;
-  background: rgba(251, 251, 251, 0.1); /* Fundo levemente claro para os inputs */
+  background: rgba(251, 251, 251, 0.1);
   color: #fbfbfb;
 }
 
 .login-input::placeholder {
-  color: rgba(251, 251, 251, 0.6); /* Placeholder mais suave */
+  color: rgba(251, 251, 251, 0.6);
 }
 
 .login-input:focus {
@@ -54,10 +50,9 @@
   background: rgba(251, 251, 251, 0.15);
 }
 
-/* Botões */
 .login-button {
-  background: #fbfbfb; /* Fundo branco conforme solicitado */
-  color: #262628; /* Texto preto conforme solicitado */
+  background: #fbfbfb;
+  color: #262628;
   border: none;
   padding: 0.75rem;
   border-radius: 4px;
@@ -68,19 +63,17 @@
 }
 
 .login-button:hover {
-  background: #e6e6e6; /* Versão levemente mais escura do branco para hover */
+  background: #e6e6e6;
   transform: translateY(-1px);
 }
 
-/* Seção de registro */
 .login-register {
   text-align: center;
   margin-top: 1.5rem;
   padding-top: 1.5rem;
-  border-top: 1px solid rgba(251, 251, 251, 0.1); /* Linha divisória sutil */
+  border-top: 1px solid rgba(251, 251, 251, 0.1);
 }
 
-/* Links dentro do card */
 .login-card a {
   color: #fbfbfb;
   text-decoration: none;

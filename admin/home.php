@@ -3,7 +3,6 @@ require_once 'check_auth.php';
 require_once 'header_admin.php';
 require_once '../config/database.php';
 
-// Buscar estatísticas
 $sql = "SELECT COUNT(*) as total_combos FROM combos";
 $result = $conn->query($sql);
 $total_combos = $result->fetch_assoc()['total_combos'];
@@ -12,32 +11,26 @@ $sql = "SELECT COUNT(*) as total_itens FROM itens";
 $result = $conn->query($sql);
 $total_itens = $result->fetch_assoc()['total_itens'];
 
-// Buscar últimos combos cadastrados
 $sql = "SELECT * FROM combos ORDER BY id DESC LIMIT 5";
 $ultimos_combos = $conn->query($sql);
 
-// Buscar últimos itens cadastrados
 $sql = "SELECT * FROM itens ORDER BY id DESC LIMIT 5";
 $ultimos_itens = $conn->query($sql);
 ?>
 
 <div class="dashboard-container">
-    <!-- Card de Boas-vindas ocupando toda a largura -->
     <div class="welcome-card">
         <h1>Bem-vindo, <?php echo htmlspecialchars($_SESSION['usuario_nome']); ?></h1>
         <p>Painel de Controle - Gerenciamento de Combos e Itens</p>
     </div>
 
-    <!-- Container de Estatísticas em linha horizontal -->
     <div class="stats-container">
-        <!-- Card de Total de Combos -->
         <div class="stat-card">
             <i class="fas fa-hamburger"></i>
             <h3>Total de Combos</h3>
             <p><?php echo $total_combos; ?></p>
         </div>
         
-        <!-- Card de Total de Itens -->
         <div class="stat-card">
             <i class="fas fa-list"></i>
             <h3>Total de Itens</h3>
@@ -61,7 +54,6 @@ $ultimos_itens = $conn->query($sql);
         </div>
 
         <div class="recent-items-section">
-    <!-- Últimos Combos -->
             <h2><i class="fas fa-burger"></i> Últimos Combos Cadastrados</h2>
             <div class="recent-grid">
                 <?php
@@ -86,7 +78,6 @@ $ultimos_itens = $conn->query($sql);
             <?php endwhile; ?>
         </div>
 
-    <!-- Últimos Itens -->
     <h2 style="margin-top: 2rem;"><i class="fas fa-list"></i> Últimos Itens Cadastrados</h2>
     <table class="recent-items-table">
         <tbody>

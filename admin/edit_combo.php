@@ -34,7 +34,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "UPDATE combos SET nome_combo = ?, preco = ?, descricao = ?, margem_lucro = ?, url_foto = ? WHERE id = ?";
         $stmt = $conn->prepare($sql);
         
-        // Mudando os tipos dos parâmetros para corresponder aos dados
         if(!$stmt->bind_param("sssdsi", $nome_combo, $preco, $descricao, $margem_lucro, $target_file, $id)) {
             echo "Erro no bind_param: " . $stmt->error;
         }
@@ -49,7 +48,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         
-        // Vamos verificar o que foi realmente salvo
         $verify_sql = "SELECT * FROM combos WHERE id = ?";
         $verify_stmt = $conn->prepare($verify_sql);
         $verify_stmt->bind_param("i", $id);
