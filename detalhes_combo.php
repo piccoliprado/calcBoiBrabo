@@ -12,13 +12,17 @@ if (isset($_GET['id'])) {
     
     if ($result->num_rows > 0) {
         $combo = $result->fetch_assoc();
+        // Aplica a mesma lógica de correção da URL da imagem
+        $imageUrl = $combo['url_foto'];
+        if (strpos($imageUrl, '../') === 0) {
+            $imageUrl = substr($imageUrl, 3);
+        }
 ?>
         <div class="container" style="padding-top: 80px;">
             <div class="combo-detalhes">
                 <div class="combo-imagem">
-                    <img src="<?php echo htmlspecialchars($combo['url_foto']); ?>" 
-                         alt="<?php echo htmlspecialchars($combo['nome_combo']); ?>"
-                         onerror="this.src='uploads/placeholder.jpg'">
+                    <img src="<?php echo htmlspecialchars($imageUrl); ?>" 
+                         alt="<?php echo htmlspecialchars($combo['nome_combo']); ?>">
                 </div>
                 <div class="combo-info">
                     <h1><?php echo htmlspecialchars($combo['nome_combo']); ?></h1>
@@ -27,7 +31,7 @@ if (isset($_GET['id'])) {
                     </div>
                     <p class="preco">R$ <?php echo number_format($combo['preco'], 2, ',', '.'); ?></p>
                     
-                    <a href="https://wa.me/SEUNUMERO?text=Olá! Gostaria de reservar o combo <?php echo urlencode($combo['nome_combo']); ?>" 
+                    <a href="https://wa.me/5542999999999?text=Olá! Gostaria de reservar o combo <?php echo urlencode($combo['nome_combo']); ?>" 
                        class="btn-reservar" target="_blank">
                         Reservar via WhatsApp
                     </a>
@@ -35,7 +39,12 @@ if (isset($_GET['id'])) {
             </div>
         </div>
 <?php
+    } else {
+        echo "<div class='container' style='padding-top: 80px;'><p>Combo não encontrado.</p></div>";
     }
+} else {
+    echo "<div class='container' style='padding-top: 80px;'><p>ID do combo não especificado.</p></div>";
 }
+
 include 'footer.php';
 ?>

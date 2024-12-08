@@ -3,7 +3,7 @@ include 'header.php'; // Inclui o cabeçalho
 include 'config/database.php';
 
 // Consultar os dados no banco
-$sql = "SELECT * FROM combos WHERE ativo = 1 ORDER BY id DESC";
+$sql = "SELECT * FROM combos ORDER BY id DESC";
 $result = $conn->query($sql);
 ?>
 
@@ -15,15 +15,12 @@ $result = $conn->query($sql);
                     <div class="combo-image">
                         <?php
                         $imageUrl = $combo['url_foto'];
-                        // Se o caminho não começar com /, adiciona
-                        if (strpos($imageUrl, '/') !== 0) {
-                        $imageUrl = '/' . $imageUrl;
+                        if (strpos($imageUrl, '../') === 0) {
+                            $imageUrl = substr($imageUrl, 3);
                         }
                         ?>
-                        <img src="<?php echo htmlspecialchars($imageUrl); ?>" 
-                            alt="<?php echo htmlspecialchars($combo['nome_combo']); ?>"
-                            style="width: 100%; height: 100%; object-fit: cover;"
-                            onerror="this.src='/uploads/placeholder.jpg'">
+                        <img src="<?php echo htmlspecialchars($imageUrl); ?>"
+                             alt="<?php echo htmlspecialchars($combo['nome_combo']); ?>">
                     </div>
                     <div class="combo-info">
                         <h2><?php echo htmlspecialchars($combo['nome_combo']); ?></h2>
@@ -39,5 +36,5 @@ $result = $conn->query($sql);
 
 <?php
 $conn->close(); // Fecha a conexão com o banco
-include 'footer.php'; // Inclui o rodapé
+include 'footer.php'; // Inclui o rodapé
 ?>

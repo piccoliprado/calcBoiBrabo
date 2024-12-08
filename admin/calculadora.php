@@ -2,7 +2,6 @@
 require_once 'header_admin.php';
 require_once '../config/database.php';
 
-// Buscar todos os itens disponíveis
 $sql = "SELECT * FROM itens ORDER BY nome ASC";
 $result = $conn->query($sql);
 $itens = [];
@@ -20,7 +19,6 @@ if ($result->num_rows > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/calcBoiBrabo/css/calculadora.css">
     <title>Calculadora de Combos</title>
-    <!-- Estilos específicos para a calculadora -->
     <style>
         .card {
             background: white;
@@ -46,22 +44,18 @@ if ($result->num_rows > 0) {
     <div class="container">
         <h1>Calculadora de Combos</h1>
         
-        <!-- Formulário principal -->
         <form id="comboForm" method="POST" action="salvar_combo.php" enctype="multipart/form-data">
-            <!-- Card do Nome do Combo -->
             <div class="card">
                 <h3>Nome do Combo</h3>
                 <input type="text" name="nome_combo" id="nome_combo" class="form-control" required>
             </div>
 
-            <!-- Card da Descrição -->
             <div class="card">
                 <h3>Descrição do Combo</h3>
                 <textarea name="descricao" id="descricao" class="form-control" rows="4" 
                           placeholder="Descreva os itens que compõem este combo..." required></textarea>
             </div>
 
-            <!-- Card de Seleção de Itens -->
             <div class="card">
                 <h3>Selecione os Itens</h3>
                 <select id="itemSelect" class="form-control" onchange="adicionarItem()">
@@ -76,7 +70,6 @@ if ($result->num_rows > 0) {
                     <?php endforeach; ?>
                 </select>
 
-                <!-- Lista de itens selecionados -->
                 <div id="itensSelecionados">
                     <h4>Itens do Combo:</h4>
                     <ul id="listaItens"></ul>
@@ -84,7 +77,6 @@ if ($result->num_rows > 0) {
                 </div>
             </div>
 
-            <!-- Card da Margem de Lucro -->
             <div class="card">
                 <h3>Definir Preço e Margem</h3>
                 <div>
@@ -96,11 +88,8 @@ if ($result->num_rows > 0) {
                     <p id="margemStatus"></p>
                 </div>
             </div>
-
-            <!-- Input hidden para armazenar os itens selecionados -->
             <input type="hidden" name="itens_selecionados" id="itensHidden">
-            
-            <!-- Card da Foto -->
+
             <div class="card">
                 <h3>Foto do Combo</h3>
                 <input type="file" name="foto" class="form-control" required accept="image/*">
@@ -111,11 +100,9 @@ if ($result->num_rows > 0) {
     </div>
 
     <script>
-    // Variáveis globais
     let itensSelecionados = [];
     let custoTotal = 0;
 
-    // Função para adicionar item ao combo
     function adicionarItem() {
         const select = document.getElementById('itemSelect');
         const option = select.options[select.selectedIndex];
@@ -136,7 +123,6 @@ if ($result->num_rows > 0) {
         select.selectedIndex = 0;
     }
 
-    // Função para remover item do combo
     function removerItem(index) {
         itensSelecionados.splice(index, 1);
         atualizarListaItens();
@@ -144,7 +130,6 @@ if ($result->num_rows > 0) {
         atualizarMargem();
     }
 
-    // Atualiza a lista visual de itens
     function atualizarListaItens() {
         const lista = document.getElementById('listaItens');
         const itensHidden = document.getElementById('itensHidden');
@@ -161,14 +146,11 @@ if ($result->num_rows > 0) {
 
         itensHidden.value = JSON.stringify(itensSelecionados.map(item => item.id));
     }
-
-    // Calcula o custo total dos itens
     function calcularCustoTotal() {
         custoTotal = itensSelecionados.reduce((total, item) => total + item.custo, 0);
         document.getElementById('custoTotal').textContent = custoTotal.toFixed(2);
     }
 
-    // Atualiza o cálculo da margem de lucro
     function atualizarMargem() {
         const precoVenda = parseFloat(document.getElementById('precoVenda').value) || 0;
         if (custoTotal > 0 && precoVenda > 0) {
@@ -188,7 +170,6 @@ if ($result->num_rows > 0) {
         }
     }
 
-    // Adiciona listener para o input de preço
     document.getElementById('precoVenda').addEventListener('input', atualizarMargem);
     </script>
 </body>
